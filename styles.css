@@ -11,3 +11,21 @@ body {
 #searchButton {
     margin: 0px 0px 0px 5px;
 }
+
+#main-container {
+    margin: 10px 0px 0px 0px;
+}
+
+#main {
+    width: 80vw;
+    background-color: #eff2f7
+}
+
+.flex {
+    display: flex;
+}
+
+.card {
+    width: 300px;
+    background-color: red;
+}

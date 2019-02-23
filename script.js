@@ -34,11 +34,10 @@ function handleAndDisplayData(data) {
         return;
     }
     mainDiv.innerHTML = '';
-    let booksUl = document.createElement('ul');
-    mainDiv.appendChild(booksUl);
     books.forEach(book => {
-        let bookLi = document.createElement('li');
-        bookLi.textContent = book.volumeInfo.title;
-        booksUl.appendChild(bookLi);
+        let cardDiv = document.createElement('div');
+        cardDiv.textContent = book.volumeInfo.title;
+        cardDiv.className = 'card';
+        mainDiv.appendChild(cardDiv);
     })
 }

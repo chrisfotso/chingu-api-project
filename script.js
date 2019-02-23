@@ -21,8 +21,9 @@ async function handleSearch() {
 }
 
 async function getData(query, APIKey) {
-    let response = await fetch(`https:www.googleapis.com/books/v1/volumes?q=${query}?key=${APIKey}`);
+    let response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}?key=${APIKey}`);
     let data = await response.json();
+    console.log(data);
     return data;
 }
 

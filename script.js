@@ -1,7 +1,7 @@
 const searchBox = document.getElementById('searchBox');
 const searchButton = document.getElementById('searchButton');
 const mainDiv = document.getElementById('main');
-const API_KEY = 'AIzaSyCHzFyndY3mRU0WOqvBwTxnCCrwL1wam54';
+const API_KEY = config.API_KEY;
 
 searchButton.addEventListener('click', handleSearch);
 

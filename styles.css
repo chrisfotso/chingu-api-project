@@ -7,3 +7,7 @@ body {
     display: flex;
     justify-content: center;
 }
+
+#searchButton {
+    margin: 0px 0px 0px 5px;
+}

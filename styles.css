@@ -25,7 +25,7 @@ h1 {
 }
 
 #main {
-    width: 80vw;
+    width: 75vw;
     justify-content: space-between;
 }
 
@@ -43,6 +43,9 @@ h1 {
     width: 400px;
     background-color: #f9faf9;
     margin: 20px 15px 20px 0px;
+    -webkit-box-shadow: 7px 10px 12px -4px rgba(0,0,0,0.43);
+    -moz-box-shadow: 7px 10px 12px -4px rgba(0,0,0,0.43);
+    box-shadow: 7px 10px 12px -4px rgba(0,0,0,0.43);
 }
 
 .cover-art {
@@ -50,6 +53,9 @@ h1 {
     width: 128px;
     height: auto;
     margin: -10px 0px 15px -10px;
+    -webkit-box-shadow: 6px 10px 24px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 6px 10px 24px 0px rgba(0,0,0,0.44);
+    box-shadow: 6px 10px 24px 0px rgba(0,0,0,0.44);
 }
 
 .book-title {

@@ -1,6 +1,11 @@
 body {
+    background-color: #f2f2f2;
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    color: #9da2a7;
 }
 
 .flex-center {
@@ -18,14 +23,19 @@ body {
 
 #main {
     width: 80vw;
-    background-color: #eff2f7
+    justify-content: space-between;
 }
 
 .flex {
     display: flex;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .card {
     width: 300px;
-    background-color: red;
+    background-color: #f9faf9;
+    margin-bottom: 10px;
 }

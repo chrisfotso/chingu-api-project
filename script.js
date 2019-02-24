@@ -3,11 +3,14 @@ const searchButton = document.getElementById('searchButton');
 const mainDiv = document.getElementById('main');
 const API_KEY = 'AIzaSyCHzFyndY3mRU0WOqvBwTxnCCrwL1wam54';
 
-searchButton.addEventListener('click', handleSearch);
-
 (() => {
     searchBox.value = '';
 })();
+
+searchButton.addEventListener('click', handleSearch);
+searchBox.addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) handleSearch();
+});
 
 async function handleSearch() {
     let inputValue = searchBox.value;
@@ -36,8 +39,17 @@ function handleAndDisplayData(data) {
     mainDiv.innerHTML = '';
     books.forEach(book => {
         let cardDiv = document.createElement('div');
-        cardDiv.textContent = book.volumeInfo.title;
         cardDiv.className = 'card';
+        populateCardDiv(book, cardDiv);
         mainDiv.appendChild(cardDiv);
     })
+}
+
+function populateCardDiv(bookInfo, parentDiv) {
+    const {volumeInfo: {authors, infoLink, publisher, title}} = bookInfo;
+    const thumbnail = bookInfo.volumeInfo.imageLinks.thumbnail ? bookInfo.volumeInfo.imageLinks.thumbnail : null;
+    
+    let coverArt = document.createElement('img');
+    coverArt.src = thumbnail;
+    parentDiv.appendChild(coverArt);
 }

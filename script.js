@@ -1,11 +1,9 @@
 const searchBox = document.getElementById('searchBox');
 const searchButton = document.getElementById('searchButton');
 const mainDiv = document.getElementById('main');
+// I know having the API key exposed is dangerous; however, there 
+// is no way for me to hide it if I'm deploying the app on Github Pages.
 const API_KEY = 'AIzaSyCHzFyndY3mRU0WOqvBwTxnCCrwL1wam54';
-
-(() => {
-    searchBox.value = '';
-})();
 
 searchButton.addEventListener('click', handleSearch);
 searchBox.addEventListener('keydown', function(e) {

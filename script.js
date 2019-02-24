@@ -39,7 +39,7 @@ function handleAndDisplayData(data) {
     mainDiv.innerHTML = '';
     books.forEach(book => {
         let cardDiv = document.createElement('div'), 
-        textSubDiv = document.createElement('div');
+        let textSubDiv = document.createElement('div');
         cardDiv.className = 'card';
         textSubDiv.className = 'text-div';
         populateCardDiv(book, cardDiv, textSubDiv);

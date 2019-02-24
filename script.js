@@ -14,7 +14,7 @@ searchBox.addEventListener('keydown', function(e) {
 
 async function handleSearch() {
     let inputValue = searchBox.value;
-    if (inputValue === '') {
+    if (inputValue === '' || inputValue.replace(/\s/, '') === '') {
         alert('Please enter a search term.');
         return;
     } else {
@@ -38,39 +38,47 @@ function handleAndDisplayData(data) {
     }
     mainDiv.innerHTML = '';
     books.forEach(book => {
-        let cardDiv = document.createElement('div');
+        let cardDiv = document.createElement('div'), 
+        textSubDiv = document.createElement('div');
         cardDiv.className = 'card';
-        populateCardDiv(book, cardDiv);
+        textSubDiv.className = 'text-div';
+        populateCardDiv(book, cardDiv, textSubDiv);
         mainDiv.appendChild(cardDiv);
     })
 }
 
-function populateCardDiv(bookInfo, parentDiv) {
+function populateCardDiv(bookInfo, parentDiv, childDiv) {
     const {volumeInfo: {authors, infoLink, publisher, title}} = bookInfo;
     const thumbnail = bookInfo.volumeInfo.imageLinks.thumbnail ? bookInfo.volumeInfo.imageLinks.thumbnail : null;
 
-    (function addCoverArtImage(url, parentDiv) {
+    (function addCoverArtImage(url, infoLink, parentDiv) {
         let coverArt = document.createElement('img');
-        coverArt.src = url;
+        let googleBooksAnchorElem = document.createElement('a');
+        googleBooksAnchorElem.href = infoLink;
+        googleBooksAnchorElem.target = '_blank';
+        coverArt.src = url || null;
         coverArt.className = 'cover-art';
-        parentDiv.appendChild(coverArt);
-    })(thumbnail, parentDiv);
+        googleBooksAnchorElem.appendChild(coverArt);
+        parentDiv.appendChild(googleBooksAnchorElem);
+    })(thumbnail, infoLink, parentDiv);
 
     (function addTextInfo(title, authors, publisher, parentDiv) {
         let titleElem = document.createElement('p');
         titleElem.textContent = title;
-        titleElem.className = 'book-title float-right';
-        parentDiv.appendChild(titleElem);
+        titleElem.className = 'book-title';
+        childDiv.appendChild(titleElem);
 
         let authorElem = document.createElement('p');
-        authorElem.textContent = `by: ${authors[0]}`;
-        authorElem.className = 'book-author float-right';
-        parentDiv.appendChild(authorElem);
+        authorElem.textContent = `by: ${authors[0] || 'Unknown'}`;
+        authorElem.className = 'book-author';
+        childDiv.appendChild(authorElem);
 
         let publisherElem = document.createElement('p');
-        publisherElem.textContent = `Published by: ${publisher}`;
-        publisherElem.className = 'book-publisher float-right';
-        parentDiv.appendChild(publisherElem);
+        publisherElem.textContent = `Published by: ${publisher || 'Unknown'}`;
+        publisherElem.className = 'book-publisher';
+        childDiv.appendChild(publisherElem);
     })(title, authors, publisher, parentDiv);
+
+    parentDiv.appendChild(childDiv);
 }
 

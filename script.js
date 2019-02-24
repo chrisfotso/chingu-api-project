@@ -48,8 +48,29 @@ function handleAndDisplayData(data) {
 function populateCardDiv(bookInfo, parentDiv) {
     const {volumeInfo: {authors, infoLink, publisher, title}} = bookInfo;
     const thumbnail = bookInfo.volumeInfo.imageLinks.thumbnail ? bookInfo.volumeInfo.imageLinks.thumbnail : null;
-    
-    let coverArt = document.createElement('img');
-    coverArt.src = thumbnail;
-    parentDiv.appendChild(coverArt);
+
+    (function addCoverArtImage(url, parentDiv) {
+        let coverArt = document.createElement('img');
+        coverArt.src = url;
+        coverArt.className = 'cover-art';
+        parentDiv.appendChild(coverArt);
+    })(thumbnail, parentDiv);
+
+    (function addTextInfo(title, authors, publisher, parentDiv) {
+        let titleElem = document.createElement('p');
+        titleElem.textContent = title;
+        titleElem.className = 'book-title float-right';
+        parentDiv.appendChild(titleElem);
+
+        let authorElem = document.createElement('p');
+        authorElem.textContent = `by: ${authors[0]}`;
+        authorElem.className = 'book-author float-right';
+        parentDiv.appendChild(authorElem);
+
+        let publisherElem = document.createElement('p');
+        publisherElem.textContent = `Published by: ${publisher}`;
+        publisherElem.className = 'book-publisher float-right';
+        parentDiv.appendChild(publisherElem);
+    })(title, authors, publisher, parentDiv);
 }
+

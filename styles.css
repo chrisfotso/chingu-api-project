@@ -39,3 +39,7 @@ h1 {
     background-color: #f9faf9;
     margin-bottom: 10px;
 }
+
+.float-right {
+    float: right;
+}

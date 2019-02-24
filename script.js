@@ -24,7 +24,7 @@ async function handleSearch() {
 }
 
 async function getData(query, APIKey) {
-    let response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20&key=${APIKey}`);
+    let response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=21&key=${APIKey}`);
     let data = await response.json();
     console.log(data);
     return data;
@@ -49,18 +49,26 @@ function handleAndDisplayData(data) {
 
 function populateCardDiv(bookInfo, parentDiv, childDiv) {
     const {volumeInfo: {authors, infoLink, publisher, title}} = bookInfo;
-    const thumbnail = bookInfo.volumeInfo.imageLinks.thumbnail ? bookInfo.volumeInfo.imageLinks.thumbnail : null;
+    let thumbnail;
+    if (bookInfo.volumeInfo.imageLinks) {
+        thumbnail = bookInfo.volumeInfo.imageLinks.thumbnail;
+    } else {
+        thumbnail = `https://i.imgur.com/izBfTfO.png`;
+    }
 
-    (function addCoverArtImage(url, infoLink, parentDiv) {
-        let coverArt = document.createElement('img');
-        let googleBooksAnchorElem = document.createElement('a');
-        googleBooksAnchorElem.href = infoLink;
-        googleBooksAnchorElem.target = '_blank';
-        coverArt.src = url || null;
-        coverArt.className = 'cover-art';
-        googleBooksAnchorElem.appendChild(coverArt);
-        parentDiv.appendChild(googleBooksAnchorElem);
-    })(thumbnail, infoLink, parentDiv);
+
+    if (thumbnail) {
+        (function addCoverArtImage(url, infoLink, parentDiv) {
+            let coverArt = document.createElement('img');
+            let googleBooksAnchorElem = document.createElement('a');
+            googleBooksAnchorElem.href = infoLink;
+            googleBooksAnchorElem.target = '_blank';
+            coverArt.src = url || null;
+            coverArt.className = 'cover-art';
+            googleBooksAnchorElem.appendChild(coverArt);
+            parentDiv.appendChild(googleBooksAnchorElem);
+        })(thumbnail, infoLink, parentDiv);
+    }
 
     (function addTextInfo(title, authors, publisher, parentDiv) {
         let titleElem = document.createElement('p');
@@ -68,10 +76,12 @@ function populateCardDiv(bookInfo, parentDiv, childDiv) {
         titleElem.className = 'book-title';
         childDiv.appendChild(titleElem);
 
-        let authorElem = document.createElement('p');
-        authorElem.textContent = `by: ${authors[0] || 'Unknown'}`;
-        authorElem.className = 'book-author';
-        childDiv.appendChild(authorElem);
+        if (authors) {
+            let authorElem = document.createElement('p');
+            authorElem.textContent = `by: ${authors[0] || 'Unknown'}`;
+            authorElem.className = 'book-author';
+            childDiv.appendChild(authorElem);
+        }
 
         let publisherElem = document.createElement('p');
         publisherElem.textContent = `Published by: ${publisher || 'Unknown'}`;

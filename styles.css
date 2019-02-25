@@ -49,11 +49,11 @@ h1 {
     box-shadow: 7px 10px 12px -4px rgba(0,0,0,0.43);
 }
 
-@media (min-width:1877px) {
+/* @media (min-width:1877px) {
     .card:last-of-type {
         flex-grow: 0;
     }
-}
+} */
 
 .cover-art {
     position: relative;
